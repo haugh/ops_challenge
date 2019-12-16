@@ -1,4 +1,8 @@
-DevOps Challenge
+# DevOps Challenge
+
+![](peek-squarelogo.png)
+<img src="devops.png" alt="devops" width="200"/>
+
 
 This repo contains an app comprised of multiple services with two data dependencies. Each directory contains a README with details for deploying the individual app. They are as follows:
 
