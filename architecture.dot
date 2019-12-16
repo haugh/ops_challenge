@@ -1,0 +1,28 @@
+digraph AppArchitecture {
+
+redis -> votingApp [constraint=false]
+worker -> db
+worker -> redis
+db -> resultApp [constraint=false]
+
+subgraph VotingApp {
+    votingApp [label="Voting App (Python)" shape=rect style=rounded]
+}
+
+subgraph Worker {
+   worker[label="Worker (Java)" shape=rect]
+}
+
+subgraph Redis {
+    redis [label="Redis" shape=cylinder]
+}
+
+subgraph Postgres {
+    db [label="Postgres" shape=cylinder]
+}
+
+subgraph ResultsApp {
+    resultApp [label="Results App (Node)" shape=rect style=rounded]
+}
+
+}
