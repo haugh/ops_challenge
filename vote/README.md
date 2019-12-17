@@ -1,6 +1,6 @@
 ## Voting Submission App
 
-This app is written in Python Flask and submits votes for one of two categories to a Redis DB. Voting is only allowed once per client. This application requires the following env vars to run:
+This app is written in Python (Flask) and submits votes for one of two categories to a Redis DB. Voting is only allowed once per client. This application requires the following env vars to run:
 
 ~~~
 # The hostname of the running Redis db

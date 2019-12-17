@@ -3,7 +3,9 @@
 ![](peek-squarelogo.png)
 
 
-This repo contains an app comprised of multiple services with two data dependencies. Each directory contains a README with details for deploying the individual app. They are as follows:
+This repo contains an app comprised of multiple services with two data dependencies. Each directory contains a README with details for deploying the individual app.
+
+The services are as follows:
 
 * A front-end web app in [Python](/vote) which lets you vote between two options
 * A [Java](/worker) worker which consumes votes and stores them in a DB
@@ -20,7 +22,7 @@ In addition there is a diagram in the root of this repository that you can use t
 dot -Tps architecture.dot -o architecture.png
 ~~~
 
-#### To complete this challenge:
+### To complete this challenge
 
 Create a script or series of scripts to deploy the application that has working data flow and also satisfies the following criteria:
 
@@ -31,5 +33,5 @@ Create a script or series of scripts to deploy the application that has working 
 
 Deliverables for cloud resources can be in any form (Terraform, Ansible, Cloudformation, Boto scripts, etc.) and should be able to be run without (a reasonable amount of) manual intervention against the chosen cloud provider to get the stack up in a real environment. Any orchestration layer for running the application is acceptable. Containerizing the services is encouraged. Please follow instructions for each service for build dependencies and relevant commands for running.
 
-# Submission Process
+### Submission Process
 Fork this repo and create your implementation files. Be sure to include any additional components and/or notes you would want as if it was your job to maintain this in a production environment. Submit a link to your forked repository and/or branch. *The estimated effort of this project is approx 4hrs.*
