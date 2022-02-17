@@ -11,3 +11,5 @@ build:
 	cd result && docker build -t chaugh04/result:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile .
 	cd vote && docker build -t chaugh04/vote:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile .
 	cd worker && docker build -t chaugh04/worker:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile .
+
+run:

@@ -1,3 +1,8 @@
+# Pre-Req
+To bring up this project locally you will need to have the following installed on your local machine.
+* minikube (https://minikube.sigs.k8s.io/docs/start/)
+* helm (https://helm.sh/docs/intro/install/)
+
 # DevOps Challenge
 
 ![](peek-squarelogo.png)
