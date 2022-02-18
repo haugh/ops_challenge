@@ -20,4 +20,4 @@ COPY --from=python /app/ /app
 COPY default-nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
-ENTRYPOINT /bin/sh -x nginx -g 'daemon off;'
+CMD ["nginx", "-g", "daemon off;"]
