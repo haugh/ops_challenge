@@ -15,4 +15,3 @@ RUN pip install -r requirements.txt
 
 FROM nginx@${NGINX_DIGEST} as nginx
 COPY --from=python /app/ /app
-ENTRYPOINT [ "python /app/app.py" ]
