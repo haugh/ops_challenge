@@ -9,5 +9,6 @@ GIT_REV=$(GIT_SHA)$(GIT_DIFF)
 # the latest commit hash, use GIT_SHA.
 build:
 	cd result && docker build -t kahiki.jfrog.io/kahiki-stable/result:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile . && docker push kahiki.jfrog.io/kahiki-stable/result:${GIT_SHA}
-	cd vote && docker build -t kahiki.jfrog.io/kahiki-stable/vote:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile . && docker push kahiki.jfrog.io/kahiki-stable/vote:${GIT_SHA}
+	cd vote && docker build --target python -t kahiki.jfrog.io/kahiki-stable/vote-python:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile . && docker push kahiki.jfrog.io/kahiki-stable/vote-python:${GIT_SHA}
+    cd vote && docker build --target nginx -t kahiki.jfrog.io/kahiki-stable/vote-nginx:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile . && docker push kahiki.jfrog.io/kahiki-stable/vote-nginx:${GIT_SHA}
 	cd worker && docker build -t kahiki.jfrog.io/kahiki-stable/worker:${GIT_SHA} --build-arg GIT_SHA=$(GIT_REV) --file Dockerfile . && docker push kahiki.jfrog.io/kahiki-stable/worker:"${GIT_SHA}"
