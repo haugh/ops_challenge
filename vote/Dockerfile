@@ -13,5 +13,7 @@ COPY requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
+CMD [ "python app.py" ]
+
 FROM nginx@${NGINX_DIGEST} as nginx
 COPY --from=python /app/ /app
