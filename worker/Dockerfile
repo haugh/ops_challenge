@@ -16,4 +16,4 @@ RUN mvn package
 FROM openjdk@${OPENJDK_DIGEST} as OPENJDK
 WORKDIR /app
 COPY --from=builder /app/target/worker-jar-with-dependencies.jar /app/
-CMD [ "sleep", "9000" ]
+ENTRYPOINT exec java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar worker-jar-with-dependencies.jar
