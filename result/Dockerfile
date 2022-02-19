@@ -15,13 +15,10 @@ RUN npm ci
 RUN npm cache clean --force
 RUN npm install -g nodemon
 
-COPY tests /app/tests
-COPY views /app/views
-
 CMD ["nodemon", "server.js"]
 
 FROM nginx@${NGINX_DIGEST} as nginx
-COPY --from=nodejs /app /app
+COPY tests /app/tests
+COPY views /app/views
 COPY default-nginx.conf /etc/nginx/conf.d/default.conf
 CMD ["nginx", "-g", "daemon off;"]
-#1
