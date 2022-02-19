@@ -76,10 +76,6 @@ class Worker {
       props.setProperty("password","787ixTv2Tf");
       props.setProperty("ssl","false");
       Connection conn = DriverManager.getConnection(url, props);
-
-      String url = "jdbc:postgresql://postgres-postgresql/postgres?user=postgres&password=787ixTv2Tf&ssl=false";
-      Connection conn = DriverManager.getConnection(url);
-
       while (conn == null) {
         try {
           conn = DriverManager.getConnection(url, props);
