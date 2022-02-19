@@ -14,8 +14,10 @@ class Worker {
     try {
       String redisHost = System.getenv("REDIS_HOST");
       String pgHost = System.getenv("POSTGRES_HOST");
+      String pgUser = System.getenv("POSTGRES_USER");
+      String pgPass = System.getenv("POSTGRES_PASS");
       Jedis redis = connectToRedis(redisHost);
-      Connection dbConn = connectToDB(pgHost);
+      Connection dbConn = connectToDB(pgHost:5432/postgres?username=pgUser&password=pgPass);
 
       System.err.println("Watching vote queue");
 
@@ -74,7 +76,7 @@ class Worker {
     try {
 
       Class.forName("org.postgresql.Driver");
-      String url = "jdbc:postgresql://${POSTGRES_HOST}/postgres?user=${POSTGRES_USER}&password=${POSTGRES_PASS}";
+      String url = "jdbc:postgresql://${pgHost}/postgres?user=${pgUser}&password=${pgPass}";
 
       while (conn == null) {
         try {
