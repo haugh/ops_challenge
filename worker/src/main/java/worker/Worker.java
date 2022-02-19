@@ -64,36 +64,26 @@ class Worker {
     return conn;
   }
 
-  static Connection connectToDB(String host) throws SQLException {
-    Connection conn = null;
+  private final String url = "jdbc:postgresql://postgres-postgresql/postgres";
+  private final String user = "postgres";
+  private final String password = "787ixTv2Tf";
 
-    try {
-
-      Class.forName("org.postgresql.Driver");
-      String url = "jdbc:postgresql://" + host + "/postgres";
-
-      while (conn == null) {
+    /**
+     * Connect to the PostgreSQL database
+     *
+     * @return a Connection object
+     */
+    public Connection connect() {
+        Connection conn = null;
         try {
-          conn = DriverManager.getConnection("jdbc:postgresql://postgres-postgresql.dev.svc.cluster.local:5432/postgres",
-            "postgres", "787ixTv2Tf");
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the PostgreSQL server successfully.");
         } catch (SQLException e) {
-          System.err.println("Waiting for db");
-          sleep(1000);
+            System.out.println(e.getMessage());
         }
-      }
 
-      PreparedStatement st = conn.prepareStatement(
-        "CREATE TABLE IF NOT EXISTS votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)");
-      st.executeUpdate();
-
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      System.exit(1);
+        return conn;
     }
-
-    System.err.println("Connected to db");
-    return conn;
-  }
 
   static void sleep(long duration) {
     try {
