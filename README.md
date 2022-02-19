@@ -1,3 +1,28 @@
+# Overview of what was done to set this up
+I have setup three different repositories in play with this setup. There is helm-app-files (These are the helm files that are used to deploy to kuberentes in a Dev,Staging,Production Enviornment), ops_challenege (This is the repo that was used for the actual applicaiton level code), and terraform-gcp (This is the terraform code that would be used to spin up a GKE cluster inside of GCP)
+
+I have setup the cat-dog voting app to run based on contanerization. I have spun application up on my home Kubernetes cluster. The overall archicture is as follows: 3 node Kubernetes cluster with the following microservices: mettalb (This is the load balancer used), istio (Service Mesh), longhorn (this is used for mainiting persistent volumes accross the cluster), cloudflare (this is used as a proxy/CDN for my applicaitons), jfrog (This is used to store the docker image).
+
+For this specific application, i have setup a namespace called dev, and used helm to create the following resources in the dev namespace: peek-results (Deployment), peek-vote (Deployment), peek-worker (Deployment), postgres (Statefulset), and redis (Statefulset).
+
+# How to access voting and view results
+You Can access the site by going to the following URLs:
+
+voting-peek.kahiki.io
+results-peek.kahiki.io
+
+# How to bring up on a kubernetes cluster
+To spin this up you can run from ops_challenge folder the following:
+
+sudo make build 
+
+This will actaully build the docker image and tag it with a sha and upload the image to jfrog. From there if you go into the helm-apps-files and go into the values.yaml file you will change the image.tag with the new sha. (This would be a automated step if there was a pipeline in play). Then you would run the following command to get the kubernetes resources on the cluster:
+
+helm upgrade peek-voting --debug -f ../helm-app-files/values.yaml ../helm-app/files/ --install --namespace=dev
+helm upgrade postgres install  bitnami/postgresql --install --namespace=dev
+
+Now you have a working cat-dog voting app up and running
+
 # DevOps Challenge
 
 ![](peek-squarelogo.png)
