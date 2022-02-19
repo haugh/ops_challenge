@@ -4,6 +4,7 @@ ARG NGINX_DIGEST=sha256:050385609d832fae11b007fbbfba77d0bba12bf72bc0dca0ac03e09b
 
 FROM node@${NODE_DIGEST} as nodejs
 
+RUN apt-get -y install postgresql
 WORKDIR /app
 
 COPY server.js package.json package-lock.json /app/
