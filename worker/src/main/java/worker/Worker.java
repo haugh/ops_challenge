@@ -70,11 +70,11 @@ class Worker {
     try {
 
       Class.forName("org.postgresql.Driver");
-      String url = "jdbc:postgresql://postgres-postgresql/postgres?user=postgres&password=787ixTv2Tf&ssl=false";
+      String url = "jdbc:postgresql://" + host + "/postgres";
 
       while (conn == null) {
         try {
-          conn = DriverManager.getConnection(url);
+          conn = DriverManager.getConnection(url, "postgres", "");
         } catch (SQLException e) {
           System.err.println("Waiting for db");
           sleep(1000);
@@ -82,7 +82,7 @@ class Worker {
       }
 
       PreparedStatement st = conn.prepareStatement(
-        "CREATE TABLE votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)");
+        "CREATE TABLE IF NOT EXISTS votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)");
       st.executeUpdate();
 
     } catch (ClassNotFoundException e) {
