@@ -12,5 +12,7 @@ RUN mvn dependency:resolve
 RUN mvn verify
 RUN mvn package
 
+FROM maven@${MAVEN_DIGEST} as java
+WORKDIR /app
 COPY --from=builder /app/target/worker-jar-with-dependencies.jar /app/
 ENTRYPOINT exec java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar worker-jar-with-dependencies.jar
