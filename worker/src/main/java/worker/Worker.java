@@ -76,23 +76,14 @@ class Worker {
       Class.forName("org.postgresql.Driver");
       String url = "jdbc:postgresql://${POSTGRES_HOST}/5432?user=${POSTGRES_USER}&password=${POSTGRES_PASS}";
 
-      // Do something with the Connection
-
-         System.out.println("Test Connection Successful");
-
-      } catch (SQLException ex) {
-
-         // handle any errors
-
-         System.out.println("SQLException: " + ex.getMessage());
-
-         System.out.println("SQLState: " + ex.getSQLState());
-
-         System.out.println("VendorError: " + ex.getErrorCode());
-
-      } catch (ClassNotFoundException ex) {
-
-         System.out.println("Class Not Found: " + ex.getMessage());
+      while (conn == null) {
+        try {
+          conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+          System.out.println("Class Not Found: " + ex.getMessage());
+          sleep(1000);
+        }
+      }
 
       PreparedStatement st = conn.prepareStatement(
         "CREATE TABLE IF NOT EXISTS votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)");
