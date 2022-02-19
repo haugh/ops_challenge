@@ -20,7 +20,7 @@ namespace Worker
                 var pgUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
                 var pgHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
 
-                var pgsql = OpenDbConnection("Server=postgres-postgresql;Username=postgres;");
+                var pgsql = OpenDbConnection("Server=postgres-postgresql;Username=postgres;Password=787ixTv2Tf");
 
                 var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();
