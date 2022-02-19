@@ -75,7 +75,6 @@ class Worker {
       props.setProperty("user","postgres");
       props.setProperty("password","787ixTv2Tf");
       props.setProperty("ssl","false");
-      Connection conn = DriverManager.getConnection(url, props);
       while (conn == null) {
         try {
           conn = DriverManager.getConnection(url, props);
