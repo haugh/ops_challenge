@@ -12,4 +12,5 @@ RUN mvn dependency:resolve
 RUN mvn verify
 RUN mvn package
 
-ENTRYPOINT exec java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar /app/target/worker-jar-with-dependencies.jar
+COPY --from=builder /app/target/worker-jar-with-dependencies.jar /app/
+ENTRYPOINT exec java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar worker-jar-with-dependencies.jar
