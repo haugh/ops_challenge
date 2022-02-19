@@ -7,15 +7,14 @@ FROM maven@${MAVEN_DIGEST} as builder
 WORKDIR /app
 
 COPY src /app/src
-COPY target /app/target
 COPY pom.xml /app/
 
 RUN mvn dependency:resolve
 RUN mvn verify
 RUN mvn package
+COPY target /app/target
 
 FROM openjdk@${OPENJDK_DIGEST} as OPENJDK
 WORKDIR /app
 COPY --from=builder /app/target/worker-jar-with-dependencies.jar /app/
-#CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar worker-jar-with-dependencies.jar"]
-CMD ["sleep", "9000"]
+CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar worker-jar-with-dependencies.jar"]
