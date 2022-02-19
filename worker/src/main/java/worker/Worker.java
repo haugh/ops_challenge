@@ -10,7 +10,6 @@ class Worker {
     try {
       String redisHost = System.getenv("REDIS_HOST");
       String pgHost = System.getenv("POSTGRES_HOST");
-      String pgPass = System.getenv("POSTGRES_PASSWORD");
       Jedis redis = connectToRedis(redisHost);
       Connection dbConn = connectToDB(pgHost);
 
@@ -75,7 +74,7 @@ class Worker {
 
       while (conn == null) {
         try {
-          conn = DriverManager.getConnection(url, "username", "password");
+          conn = DriverManager.getConnection(url, "postgres", "");
         } catch (SQLException e) {
           System.err.println("Waiting for db");
           sleep(1000);
