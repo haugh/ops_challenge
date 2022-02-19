@@ -16,8 +16,9 @@ class Worker {
       String pgHost = System.getenv("POSTGRES_HOST");
       String pgUser = System.getenv("POSTGRES_USER");
       String pgPass = System.getenv("POSTGRES_PASS");
+      String pgCon  = ${pgHost}/postgres?user=${pgUser}&password=${pgPass}
       Jedis redis = connectToRedis(redisHost);
-      Connection dbConn = connectToDB(pgHost:5432/postgres?username=pgUser&password=pgPass);
+      Connection dbConn = connectToDB(pgCon);
 
       System.err.println("Watching vote queue");
 
