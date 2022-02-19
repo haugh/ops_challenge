@@ -20,3 +20,5 @@ CMD ["nodemon", "server.js"]
 FROM nginx@${NGINX_DIGEST} as nginx
 COPY --from=nodejs /app /app
 COPY default-nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -rf /etc/nginx/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]

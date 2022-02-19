@@ -18,3 +18,6 @@ CMD ["python", "app.py"]
 FROM nginx@${NGINX_DIGEST} as nginx
 COPY --from=python /app /app
 COPY default-nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -rf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]
