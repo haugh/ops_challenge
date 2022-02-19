@@ -1,7 +1,7 @@
 #Here we are specifying the node image that we are gonna use and securing it by using the sha
 ARG OPENJDK_DIGEST=sha256:f53b9dfe3a1da1a7df2a9158df1932689ce24fc001da1a5e8e6b48e10cc3f75b
 
-FROM openjdk@${OPENJDK_DIGEST} as OPENJDK
+FROM maven@${OPENJDK_DIGEST} as OPENJDK
 WORKDIR /app
 
 COPY src /app/src
