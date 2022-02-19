@@ -10,7 +10,7 @@ class Worker {
     try {
       String redisHost = System.getenv("REDIS_HOST");
       String pgHost = System.getenv("POSTGRES_HOST");
-      String pgPass = System.getenv("POSTGRES_PASSWORD")
+      String pgPass = System.getenv("POSTGRES_PASSWORD");
       Jedis redis = connectToRedis(redisHost);
       Connection dbConn = connectToDB(pgHost);
 
