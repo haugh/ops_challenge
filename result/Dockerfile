@@ -6,6 +6,7 @@ FROM node@${NODE_DIGEST} as nodejs
 
 RUN apk update 
 RUN apk add postgresql
+
 WORKDIR /app
 
 COPY server.js package.json package-lock.json /app/
@@ -20,6 +21,6 @@ COPY views /app/views
 CMD ["nodemon", "server.js"]
 
 FROM nginx@${NGINX_DIGEST} as nginx
-COPY --from=nodejs /app/ /app
+COPY --from=nodejs /app /app
 COPY default-nginx.conf /etc/nginx/conf.d/default.conf
 CMD ["nginx", "-g", "daemon off;"]
