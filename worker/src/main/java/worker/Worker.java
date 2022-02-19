@@ -80,7 +80,7 @@ class Worker {
         try {
           conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-          System.out.println("Class Not Found: " + ex.getMessage());
+          System.err.println("Waiting for db");
           sleep(1000);
         }
       }
