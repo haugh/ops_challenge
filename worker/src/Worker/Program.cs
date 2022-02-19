@@ -19,8 +19,8 @@ namespace Worker
                 var redisHost = Environment.GetEnvironmentVariable("REDIS_HOST");
                 var pgUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
                 var pgHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
-
-                var pgsql = OpenDbConnection($"Server={pgHost};Username={pgUser};");
+                var pgPassword = Environment.GetEnvironmentVariable("POSTGRES_Password");
+                var pgsql = OpenDbConnection($"Server={pgHost};Username={pgUser};Password={pgPass}");
 
                 var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();

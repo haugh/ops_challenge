@@ -1,5 +1,6 @@
 const pgHost = process.env.POSTGRES_HOST
 const pgUser = process.env.POSTGRES_USER
+const pgPassword = process.env.POSTGRES_PASSWORD
 
 var express = require('express'),
   async = require('async'),
@@ -29,7 +30,7 @@ io.sockets.on('connection', function (socket) {
 
 
 var pool = new pg.Pool({
-  connectionString: `postgres://${pgUser}@${pgHost}/postgres`
+  connectionString: `postgres://${pgUser}:${pgPassword}@${pgHost}/postgres`
 });
 
 async.retry(
