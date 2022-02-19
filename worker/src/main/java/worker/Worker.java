@@ -11,6 +11,7 @@ class Worker {
       String redisHost = System.getenv("REDIS_HOST");
       String pgHost = System.getenv("POSTGRES_HOST");
       Jedis redis = connectToRedis(redisHost);
+      Connection dbConn = connectToDB(pgHost);
 
       System.err.println("Watching vote queue");
 
@@ -63,26 +64,35 @@ class Worker {
     return conn;
   }
 
-  private final String url = "jdbc:postgresql://postgres-postgresql/postgres";
-  private final String user = "postgres";
-  private final String password = "787ixTv2Tf";
+  static Connection connectToDB(String host) throws SQLException {
+    Connection conn = null;
 
-    /**
-     * Connect to the PostgreSQL database
-     *
-     * @return a Connection object
-     */
-    public Connection connect() {
-        Connection conn = null;
+    try {
+
+      Class.forName("org.postgresql.Driver");
+      String url = "jdbc:postgresql://${POSTGRES_HOST}/5432?user=${POSTGRES_USER}&password=${POSTGRES_PASS};
+
+      while (conn == null) {
         try {
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
+          conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+          System.err.println("Waiting for db");
+          sleep(1000);
         }
+      }
 
-        return conn;
+      PreparedStatement st = conn.prepareStatement(
+        "CREATE TABLE IF NOT EXISTS votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)");
+      st.executeUpdate();
+
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+      System.exit(1);
     }
+
+    System.err.println("Connected to db");
+    return conn;
+  }
 
   static void sleep(long duration) {
     try {
