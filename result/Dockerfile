@@ -4,6 +4,7 @@ ARG NGINX_DIGEST=sha256:050385609d832fae11b007fbbfba77d0bba12bf72bc0dca0ac03e09b
 
 FROM node@${NODE_DIGEST} as nodejs
 
+RUN apk update 
 RUN apk add postgresql
 WORKDIR /app
 
@@ -19,6 +20,6 @@ COPY views /app/views
 CMD ["nodemon", "server.js"]
 
 FROM nginx@${NGINX_DIGEST} as nginx
-COPY --from=nodejs /app /app
+COPY --from=nodejs /app/* /app
 COPY default-nginx.conf /etc/nginx/conf.d/default.conf
 CMD ["nginx", "-g", "daemon off;"]
