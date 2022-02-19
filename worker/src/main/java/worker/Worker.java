@@ -70,7 +70,7 @@ class Worker {
     try {
 
       Class.forName("org.postgresql.Driver");
-      String url = "jdbc:postgresql://${POSTGRES_HOST}/5432?user=${POSTGRES_USER}&password=${POSTGRES_PASS};
+      String url = "jdbc:postgresql://${POSTGRES_HOST}/5432?user=${POSTGRES_USER}&password=${POSTGRES_PASS}";
 
       while (conn == null) {
         try {
