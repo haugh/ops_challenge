@@ -11,7 +11,6 @@ class Worker {
       String redisHost = System.getenv("REDIS_HOST");
       String pgHost = System.getenv("POSTGRES_HOST");
       Jedis redis = connectToRedis(redisHost);
-      Connection dbConn = connectToDB(pgHost);
 
       System.err.println("Watching vote queue");
 
