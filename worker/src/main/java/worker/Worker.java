@@ -2,8 +2,10 @@ package worker;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
-import java.sql.*;
 import org.json.JSONObject;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 class Worker {
   public static void main(String[] args) {
