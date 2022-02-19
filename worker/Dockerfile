@@ -14,6 +14,7 @@ RUN mvn verify
 RUN mvn package
 
 FROM openjdk@${OPENJDK_DIGEST} as OPENJDK
+RUN apt-get install postgresql
 WORKDIR /app
 COPY --from=builder /app/target/worker-jar-with-dependencies.jar /app/
 CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "worker-jar-with-dependencies.jar"]
