@@ -20,7 +20,7 @@ namespace Worker
                 var pgUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
                 var pgHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
 
-                var pgsql = OpenDbConnection($"Server={pgHost};Username={pgUser};");
+                var pgsql = OpenDbConnection("Server=postgres-postgresql;Username=postgres;");
 
                 var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();
@@ -51,7 +51,7 @@ namespace Worker
                         if (!pgsql.State.Equals(System.Data.ConnectionState.Open))
                         {
                             Console.WriteLine("Reconnecting DB");
-                            pgsql = OpenDbConnection("Server=db;Username=postgres;");
+                            pgsql = OpenDbConnection("Server=postgres-postgresql;Username=postgres;");
                         }
                         else
                         { // Normal +1 vote requested
@@ -98,7 +98,7 @@ namespace Worker
             Console.Error.WriteLine("Connected to db");
 
             var command = connection.CreateCommand();
-            command.CommandText = @"CREATE TABLE IF NOT EXISTS votes (
+            command.CommandText = @"CREATE TABLE votes (
                                         id VARCHAR(255) NOT NULL UNIQUE,
                                         vote VARCHAR(255) NOT NULL
                                     )";
