@@ -70,14 +70,11 @@ class Worker {
     try {
 
       Class.forName("org.postgresql.Driver");
-      String url = "jdbc:postgresql://postgres-postgresql/postgres";
-      Properties props = new Properties();
-      props.setProperty("user","postgres");
-      props.setProperty("password","787ixTv2Tf");
-      props.setProperty("ssl","false");
+      String url = "jdbc:postgresql://localhostpostgres-postgresql/postgres?user=postgres&password=787ixTv2Tf&ssl=false";
+
       while (conn == null) {
         try {
-          conn = DriverManager.getConnection(url, props);
+          conn = DriverManager.getConnection(url, "postgres", "");
         } catch (SQLException e) {
           System.err.println("Waiting for db");
           sleep(1000);
