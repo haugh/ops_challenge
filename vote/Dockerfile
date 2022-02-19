@@ -4,8 +4,6 @@ ARG NGINX_DIGEST=sha256:050385609d832fae11b007fbbfba77d0bba12bf72bc0dca0ac03e09b
 
 FROM python@${PYTHON_DIGEST} as python
 
-RUN apt-get install redis-server -y
-
 WORKDIR /app
 
 COPY static /app/static
